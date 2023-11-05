@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 const mongoose =require('mongoose');
 mongoose.connect(process.env.CONFIG_MONGOOSE).then(()=>{console.log('database connected');}).catch(err=>{console.log(err);})
