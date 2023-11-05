@@ -23,16 +23,10 @@ app.post("/sendMail", async (req, res) =>
     let responce = await sendMail(req.body);
     console.log('responce', responce);
     if (responce.status === 200) {
-        let msg =new database({
-            name:req.body.name,
-            email:req.body.email,
-            message:req.body.message,
-            date:new Date()
-        });
-        let responce1 =  await msg.save();
-        if(!responce1)
+        let msg =await (await database()).insertOne({name:req.body.name,email:req.body.email,message:req.body.message,date:new Date()});
+        if(!msg.acknowledged)
         {
-        return res.status(300).json({ message: 'data not stored' });
+            return res.status(300).json({message:'data not inserted in database'});
         }
         return res.status(200).json({ message: 'Success' });
     }
