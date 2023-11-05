@@ -37,7 +37,7 @@ app.post("/sendMail", async (req, res) =>
         return res.status(200).json({ message: 'Success' });
     }
     else {
-        return res.status(300).json({ message: 'mail not sent' });
+        return res.status(400).json({ message: 'mail not sent' });
     }
     } catch (error) {
         console.log('error',error)
